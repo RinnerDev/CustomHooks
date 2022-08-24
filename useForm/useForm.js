@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-export const useForm = (formValues = {}) => {
+export const useForm = (initialForm = {}) => {
 
-    const [formState, setFormState] = useState({...formValues})
+    const [formState, setFormState] = useState({...initialForm})
 
-    const inputValue = ({ target }) => {
+    const onInputChange = ({ target }) => {
         const { name, value } = target
         setFormState({
             ...formState,
@@ -12,14 +12,14 @@ export const useForm = (formValues = {}) => {
         })
     }
 
-    const resetForm = () => {
-        setFormState(formValues)
+    const onResetForm = () => {
+        setFormState(initialForm)
     }
 
     return {
         ...formState,
         formState,
-        inputValue,
-        resetForm
+        onInputChange,
+        onResetForm
     }
 }
